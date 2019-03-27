@@ -5,12 +5,17 @@ music collection with [Ampache](http://www.ampache.org).  They run on top
 of my [Debian base system](http://github.com/jgoerzen/docker-debian-base),
 which provides excellent logging capabilities.
 
+The [ampache image collection](https://github.com/jgoerzen/docker-ampache)
+provides these images:
+
+ - [jgoerzen/ampache](https://github.com/jgoerzen/docker-ampache-base),
+   the main server, designed to be used with an outside MySQL/MariaDB server
+ - [jgoerzen/ampache-mysql](https://github.com/jgoerzen/docker-ampache-mysql),
+   everything in `jgoerzen/ampache` plus an embedded MariaDB server in
+   the image for very easy setup.
+   
 This image provides the Ampache server, with full support for transcoding
 on the fly.
-
-I provide two images: jgoerzen/ampache, which is designed to be used
-with an outside MySQL/MariaDB server, and jgoerzen/ampache-mysql,
-which includes an embedded MariaDB server in the image for very easy setup.
 
 You can download with:
 
@@ -88,7 +93,7 @@ These Docker tags are defined:
 # Copyright
 
 Docker scripts, etc. are
-Copyright (c) 2017 John Goerzen
+Copyright (c) 2017-2019 John Goerzen
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
