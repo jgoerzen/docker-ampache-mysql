@@ -23,7 +23,10 @@ You can download with:
 
 And run with something like this:
 
-    docker run -td -p 8080:80 -p 80443:443 --stop-signal=SIGPWR \
+    docker run -td -p 8080:80 -p 80443:443 \
+    --stop-signal=SIGRTMIN+3 \ 
+    --tmpfs /run:size=100M --tmpfs /run/lock:size=100M \
+    -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
     -v /musicdir:/music:ro \
     -v /playlistdir:/playlists:rw \
     --name=ampache jgoerzen/ampache-mysql
