@@ -34,6 +34,17 @@ And run with something like this:
     -v /playlistdir:/playlists:rw \
     --name=ampache jgoerzen/ampache-mysql
 
+Or with a newer systemd, as in Debian bullseye on the host
+
+    docker run -td -p 8080:80 -p 80443:443 \
+    --stop-signal=SIGRTMIN+3 \ 
+    --tmpfs /run:size=100M --tmpfs /run/lock:size=100M \
+    -v /sys/fs/cgroup:/sys/fs/cgroup:rw --cgroupns=host \
+    -v /musicdir:/music:ro \
+    -v /playlistdir:/playlists:rw \
+    --name=ampache jgoerzen/ampache-mysql
+
+
 (Omit the `-mysql` from both commands if you have a MySQL server elsewhere that you
 will connect to.)
 
