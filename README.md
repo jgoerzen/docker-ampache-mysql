@@ -29,21 +29,20 @@ And run with something like this:
     docker run -td -p 8080:80 -p 80443:443 \
     --stop-signal=SIGRTMIN+3 \ 
     --tmpfs /run:size=100M --tmpfs /run/lock:size=100M \
-    -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
-    -v /musicdir:/music:ro \
-    -v /playlistdir:/playlists:rw \
-    --name=ampache jgoerzen/ampache-mysql
-
-Or with a newer systemd, as in Debian bullseye on the host
-
-    docker run -td -p 8080:80 -p 80443:443 \
-    --stop-signal=SIGRTMIN+3 \ 
-    --tmpfs /run:size=100M --tmpfs /run/lock:size=100M \
     -v /sys/fs/cgroup:/sys/fs/cgroup:rw --cgroupns=host \
     -v /musicdir:/music:ro \
     -v /playlistdir:/playlists:rw \
     --name=ampache jgoerzen/ampache-mysql
 
+Or with an older systemd on the host:
+
+    docker run -td -p 8080:80 -p 80443:443 \
+    --stop-signal=SIGRTMIN+3 \ 
+    --tmpfs /run:size=100M --tmpfs /run/lock:size=100M \
+    -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+    -v /musicdir:/music:ro \
+    -v /playlistdir:/playlists:rw \
+    --name=ampache jgoerzen/ampache-mysql
 
 (Omit the `-mysql` from both commands if you have a MySQL server elsewhere that you
 will connect to.)
@@ -86,7 +85,7 @@ Ampache is exposed at path `/ampache` on the configured system.
 # Source
 
 This is prepared by John Goerzen <jgoerzen@complete.org> and the source
-can be found at https://github.com/jgoerzen/docker-ampache
+can be found at https://salsa.debian.org/jgoerzen/docker-ampache
 
 # Security Status
 
@@ -104,13 +103,13 @@ should `chown -R www-data:www-data /var/www/html/ampache`.
 
 These Docker tags are defined:
 
- - latest is built against the Ampache github master branch (which they recommend)
+ - latest is built against the Ampache master branch (which they recommend)
  - Other branches use the versioned tarballs
 
 # Copyright
 
 Docker scripts, etc. are
-Copyright (c) 2017-2022 John Goerzen
+Copyright (c) 2017-2023 John Goerzen
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
